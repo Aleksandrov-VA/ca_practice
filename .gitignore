@@ -1,0 +1,18 @@
+# файлы виртуального окружения
+env/
+venv/
+.venv/
+
+# кеш и временные файлы
+__pycache__/
+*.py[cod]
+$py.class
+
+# файлы IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# лог-файлы
+*.log
