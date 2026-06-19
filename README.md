@@ -1,27 +1,42 @@
-# _Учебный проект "ca_practice" vers. 0.0.2_
+# _Учебный проект "ca_practice" vers. 0.0.3_
 
 ### _Описание текущей версии:_
-_V.0.0.2 разработка доменного слоя модуля events_
+_V.0.0.3 настройка проекта, добавление конфигурационных файлов_
 
 ### _Структура проекта:_
 
 ```
-app/
-└── events/
-   ├── domain/
-   │   ├── value_objects.py
-   │   ├── entities.py
-   │   └── interfaces.py
-   ├── application/
-   │   └── use_cases.py
-   ├── infrastructure/
-   │   └── repositories.py
-   └── api/
-       ├── routes.py
-       └── schemas.py
+project/
+ ├───── app/
+ │      └─ events/
+ │         ├── domain/
+ │         │   ├── value_objects.py
+ │         │   ├── entities.py
+ │         │   └── interfaces.py
+ │         ├── application/
+ │         │   └── use_cases.py
+ │         ├── infrastructure/
+ │         │   └── repositories.py
+ │         └── api/
+ │             ├── routes.py
+ │             └── schemas.py
+ │ 
+ ├───── test/
+ │      ├─── conftest.py
+ │      └─── test_event_obj.py
+ │  
+ ├───── .github/
+ │       └── workflows/
+ │           └── python-app.yml  
+ │ 
+ ├───── .gitignore
+ ├───── pytest.ini
+ ├───── readme.md
+ └───── requirements.txt
+
 
 ```
 ### _Реализуемые функции:_
-1. _добавлен класс доменной сущности Event_
-2. _реализовано тестирование методов создания и обновления объектов события, преобразования объекта события в словарь, а также восстановления объекта события 
-из словаря_
+1. _настроен github.workflow: запуск тестирования после комита в main_
+2. _добавлены файлы requirements.txt, .gitignore, pytest.ini_
+3. _актуализирована структура проекта_
