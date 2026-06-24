@@ -110,3 +110,4 @@ def test_event_round_serialization(valid_event):
     event_to_dict = valid_event.to_dict()
     restored_event = Event.restore_from_dict(event_to_dict)
     assert restored_event == valid_event
+
