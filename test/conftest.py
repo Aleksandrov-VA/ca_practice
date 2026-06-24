@@ -4,7 +4,7 @@ from app.events.infrastructure.inmemory_event_repository import InMemoryEventRep
 
 @pytest.fixture
 def valid_event():
-    """валидный объект"""
+    """фикстура предоставляющая валидный объект события"""
     return Event.create(
         title       = 'заголовок тестового события',
         description = 'описание тестового события',
@@ -14,4 +14,5 @@ def valid_event():
 
 @pytest.fixture(scope="function")
 def inmemory_repo():
+    """фикстура предоставляющая валидный объект хранимого в памяти репозитория"""
     return InMemoryEventRepository()
