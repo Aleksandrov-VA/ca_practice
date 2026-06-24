@@ -3,14 +3,14 @@ from uuid import UUID
 
 @pytest.mark.asyncio
 async def test_inmemory_repository_get_event_valid_data(valid_event, inmemory_repo):
-    """ добавить описание """
+    """ проверка получения существующей в репозитории записи (события) по id события """
     await inmemory_repo.create_event_in_repo(valid_event)
     stored_event = await inmemory_repo.get_event_by_id(valid_event.id)
     assert stored_event == valid_event
 
 @pytest.mark.asyncio
 async def test_inmemory_repository_get_non_exist_event_in_repo(valid_event, inmemory_repo):
-    """ добавить описание """
+    """ проверка получения отсутствующей в репозитории записи (события) по id события """
     await inmemory_repo.create_event_in_repo(valid_event)
     non_exist_id = UUID("00000000-0000-0000-0000-000000000000")
     non_exist_event = await inmemory_repo.get_event_by_id(non_exist_id)
@@ -18,14 +18,14 @@ async def test_inmemory_repository_get_non_exist_event_in_repo(valid_event, inme
 
 @pytest.mark.asyncio
 async def test_inmemory_repository_create_event_valid_data(valid_event, inmemory_repo):
-    """ добавить описание """
+    """ проверка создания в репозитории новой записи (события) """
     await inmemory_repo.create_event_in_repo(valid_event)
     stored_event = await inmemory_repo.get_event_by_id(valid_event.id)
     assert stored_event == valid_event
 
 @pytest.mark.asyncio
 async def test_inmemory_repository_create_event_duplicate_id(valid_event, inmemory_repo):
-    """ добавить описание """
+    """ проверка создания в репозитории дубликата существующей записи (события) """
     await inmemory_repo.create_event_in_repo(valid_event)
     with pytest.raises(ValueError) as exc:
         await inmemory_repo.create_event_in_repo(valid_event)
@@ -33,6 +33,7 @@ async def test_inmemory_repository_create_event_duplicate_id(valid_event, inmemo
 
 @pytest.mark.asyncio
 async def test_inmemory_repository_delete_event_valid_data(valid_event, inmemory_repo):
+    """ проверка удаления из репозитория существующей записи (события) """
     await inmemory_repo.create_event_in_repo(valid_event)
     await inmemory_repo.delete_event_in_repo(valid_event.id)
 
@@ -41,6 +42,7 @@ async def test_inmemory_repository_delete_event_valid_data(valid_event, inmemory
 
 @pytest.mark.asyncio
 async def test_inmemory_repository_delete_non_exist_event_in_repo(valid_event, inmemory_repo):
+    """ проверка удаления из репозитория несуществующей записи (события) """
     non_exist_event = await inmemory_repo.delete_event_in_repo(valid_event.id)
     assert non_exist_event is None
 
@@ -57,7 +59,7 @@ async def test_inmemory_repository_delete_non_exist_event_in_repo(valid_event, i
     ])
 
 async def test_inmemory_repository_update_event_valid_attributes(valid_event, inmemory_repo, update_kwargs):
-    """ обновления записи в репозитории с корректными данными """
+    """ проверка обновления существующей записи (события) - успешное обновление описания и заголовка события """
     await inmemory_repo.create_event_in_repo(valid_event)
     await inmemory_repo.update_event_in_repo(valid_event, **update_kwargs)
 
@@ -80,6 +82,7 @@ async def test_inmemory_repository_update_event_valid_attributes(valid_event, in
     ])
 
 async def test_inmemory_repository_update_event_valid_time_period(valid_event, inmemory_repo, update_kwargs):
+    """ проверка обновления существующей записи (события) - успешное обновление временных меток события """
     await inmemory_repo.create_event_in_repo(valid_event)
     await inmemory_repo.update_event_in_repo(valid_event, **update_kwargs)
 
@@ -105,12 +108,11 @@ async def test_inmemory_repository_update_event_valid_time_period(valid_event, i
     ])
 
 async def test_inmemory_repository_update_non_exist_event_in_repo(valid_event, inmemory_repo, update_kwargs):
-    """ добавить описание """
+    """ проверка обновления несуществующей записи (события) """
 
     with pytest.raises(ValueError) as exc:
         await inmemory_repo.update_event_in_repo(valid_event, **update_kwargs)
-    assert str(
-        exc.value) == f'событие event.id = {valid_event.id} не найдено в репозитории'
+    assert str(exc.value) == f'событие event.id = {valid_event.id} не найдено в репозитории'
 
 
 
