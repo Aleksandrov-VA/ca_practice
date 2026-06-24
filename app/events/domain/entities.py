@@ -52,7 +52,6 @@ class Event:
         except ValueError as exc:
             raise ValueError(f'ошибка валидации: {exc}')
 
-
     def __eq__(self, other):
         if not isinstance(self, Event):
             return False
